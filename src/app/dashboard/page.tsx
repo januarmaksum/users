@@ -1,21 +1,17 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import UserList from "@/components/users/UserList";
+import withAuth from "@/components/withAuth";
 
 export const metadata = {
   title: "Users - Dashboard",
 };
 
-export default function DashboardPage() {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token");
-
-  if (!token) {
-    redirect("/login");
-  }
-
+const DashboardPage = () => {
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <h1 className="text-2xl">Welcome to the Dashboard</h1>
+    <div className="container max-w-4xl mx-auto px-4">
+      <h1 className="text-2xl border-b mb-4 font-bold">User List</h1>
+      <UserList />
     </div>
   );
-}
+};
+
+export default withAuth(DashboardPage);

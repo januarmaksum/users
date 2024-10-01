@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { loginUser } from "@/services/authService";
 import Cookies from "js-cookie";
 import { LoginPayload } from "@/interfaces/auth.interface";
 
 const LoginForm = () => {
-  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<LoginPayload>({
@@ -30,7 +28,7 @@ const LoginForm = () => {
 
       if (data && data.token) {
         Cookies.set("token", data.token, { expires: 1 });
-        router.push("/dashboard");
+        window.location.href = "/dashboard";
       } else {
         setErrorMessage("Login failed. Please try again.");
       }

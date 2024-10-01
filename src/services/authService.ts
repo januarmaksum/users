@@ -1,6 +1,5 @@
 import { LoginPayload, LoginResponse } from "@/interfaces/auth.interface";
-
-const API_URL = "https://reqres.in/api";
+import { API_URL } from "@/constants";
 
 export const loginUser = async (
   payload: LoginPayload

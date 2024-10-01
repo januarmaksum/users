@@ -1,6 +1,5 @@
+import withRedirectToDashboard from "@/components/withRedirectToDashboard";
 import LoginForm from "@/components/login/LoginForm";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 
 export const metadata = {
   title: "Login - My App",
@@ -8,13 +7,6 @@ export const metadata = {
 };
 
 const LoginPage = async () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-
-  if (token) {
-    redirect("/dashboard");
-  }
-
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white rounded shadow">
@@ -25,4 +17,4 @@ const LoginPage = async () => {
   );
 };
 
-export default LoginPage;
+export default withRedirectToDashboard(LoginPage);
