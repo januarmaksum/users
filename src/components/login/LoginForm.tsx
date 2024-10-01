@@ -34,7 +34,7 @@ const LoginForm = () => {
       } else {
         setErrorMessage("Login failed. Please try again.");
       }
-    } catch (error) {
+    } catch {
       setErrorMessage("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
