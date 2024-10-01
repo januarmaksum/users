@@ -10,7 +10,6 @@ const withRedirectToDashboard = <P extends object>(WrappedComponent: React.Compo
     // check if the user is already login
     if (token) {
       redirect("/dashboard");
-      return null;
     }
 
     return <WrappedComponent {...props} />;

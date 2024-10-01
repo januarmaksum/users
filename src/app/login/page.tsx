@@ -2,8 +2,8 @@ import withRedirectToDashboard from "@/components/withRedirectToDashboard";
 import LoginForm from "@/components/login/LoginForm";
 
 export const metadata = {
-  title: "Login - My App",
-  description: "Login to access your account and manage your settings.",
+  title: "Login",
+  description: "Login to access your account.",
 };
 
 const LoginPage = async () => {
