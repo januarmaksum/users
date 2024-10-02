@@ -24,3 +24,7 @@ export interface SingleUserResponse {
     text: string;
   };
 }
+
+export interface UpdateUser {
+  (updatedUser: User): Promise<void>;
+}

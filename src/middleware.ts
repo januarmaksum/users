@@ -8,7 +8,7 @@ export function middleware(req: NextRequest) {
   const publicPaths = ['/login'];
 
   if (publicPaths.includes(req.nextUrl.pathname)) {
-    // If the token exists, redirect to the dashboard
+    // if token exist, redirect to dashboard
     if (token) {
       return NextResponse.redirect(new URL('/dashboard', req.url));
     }
