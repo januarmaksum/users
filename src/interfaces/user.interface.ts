@@ -17,3 +17,10 @@ export interface UserResponse {
     text: string;
   };
 }
+export interface SingleUserResponse {
+  data: User;
+  support: {
+    url: string;
+    text: string;
+  };
+}
