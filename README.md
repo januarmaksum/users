@@ -3,7 +3,7 @@
 ## Overview
 This is a [React](https://reactjs.org/) + [Next.js 14](https://nextjs.org/) project using Server-Side Rendering (SSR), [TypeScript](https://www.typescriptlang.org/), [Tailwind CSS](https://tailwindcss.com/), and [Prisma](https://www.prisma.io/) as the ORM for database management.
 
-## Features
+## Techstack
 - **React** for building UI components
 - **Next.js 14** with Server-Side Rendering (SSR)
 - **TypeScript** for static type checking
@@ -18,7 +18,7 @@ Make sure you have the following installed on your machine:
 
 ## Installation
 
-1. **Clone the repository**:
+1. **Clone repository**:
    ```bash
    git clone from this repo https://github.com/januarmaksum/users
    ```
@@ -28,7 +28,11 @@ Make sure you have the following installed on your machine:
    npm install
    ```
 
-3. **Run the development server**:
+3. **Run development server**:
    ```bash
    npm run dev
+   ```
+4. **Run Prisma studio**:
+   ```bash
+   npx prisma studio
    ```
