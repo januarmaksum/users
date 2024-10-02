@@ -50,8 +50,21 @@ export default async function handler(
       console.error("Error updating user:", error);
       res.status(500).json({ error: "Error updating user" });
     }
+  } else if (req.method === "DELETE") {
+    try {
+      const { id } = req.body;
+
+      const deletedUser = await prisma.user.delete({
+        where: { id },
+      });
+
+      res.status(200).json(deletedUser);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      res.status(500).json({ error: "Error deleting user" });
+    }
   } else {
-    res.setHeader("Allow", ["GET", "POST", "PUT"]);
+    res.setHeader("Allow", ["GET", "POST", "PUT", "DELETE"]);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

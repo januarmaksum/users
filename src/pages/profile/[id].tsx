@@ -55,15 +55,43 @@ const UserDetailPage = ({ user: initialUser }: { user: User }) => {
     }
 
     const updatedUser = await response.json();
-    setUser(updatedUser); // Update the user state with the new data
+    setUser(updatedUser);
   };
 
   const handleUserCreated = async (updatedUser: User) => {
     console.log("Updated user:", updatedUser);
     try {
-      await refetchUser(); // Refetch user details after successful update
+      await refetchUser();
     } catch (error) {
       console.error("Error updating user:", error);
+    }
+  };
+
+  const handleUserDelete = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: user.id }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete user");
+      }
+
+      router.push("/");
+    } catch (error) {
+      console.error("Error deleting user:", error);
     }
   };
 
@@ -93,7 +121,13 @@ const UserDetailPage = ({ user: initialUser }: { user: User }) => {
               onClick={() => setIsModalOpen(true)}
               className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
             >
-              Edit User
+              Edit
+            </button>
+            <button
+              onClick={handleUserDelete}
+              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Delete
             </button>
           </div>
         </div>
@@ -109,7 +143,7 @@ const UserDetailPage = ({ user: initialUser }: { user: User }) => {
         <UserForm
           submitLabel="Update User"
           initialValues={{
-            id: user.id, // Pass user ID for updating
+            id: user.id,
             email: user.email,
             first_name: user.first_name,
             last_name: user.last_name,

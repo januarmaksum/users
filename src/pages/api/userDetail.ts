@@ -13,7 +13,6 @@ export default async function handler(
     }
 
     try {
-      // Fetch user data from the Prisma database
       const user = await prisma.user.findUnique({
         where: { id: Number(id) },
       });
@@ -22,7 +21,6 @@ export default async function handler(
         return res.status(404).json({ error: "User not found" });
       }
 
-      // Return user data from the database
       res.status(200).json(user);
     } catch (error) {
       console.error("Error fetching user:", error);

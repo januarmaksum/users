@@ -2,9 +2,9 @@ import { User } from "@/interfaces/user.interface";
 import React, { useEffect, useState } from "react";
 
 interface UserFormProps {
-  onSubmit: (updatedUser: User) => Promise<void>; // Accepts updated user
+  onSubmit: (updatedUser: User) => Promise<void>;
   initialValues?: {
-    id: number; // Make sure to include id for updates
+    id: number;
     email: string;
     first_name: string;
     last_name: string;
@@ -25,7 +25,6 @@ const UserForm: React.FC<UserFormProps> = ({
     avatar: initialValues?.avatar || "",
   });
 
-  // Update formData when initialValues changes
   useEffect(() => {
     if (initialValues) {
       setFormData(initialValues);
@@ -43,7 +42,7 @@ const UserForm: React.FC<UserFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const url = `${process.env.NEXT_PUBLIC_API_URL}/api/users`
-    const method = initialValues ? "PUT" : "POST"; // Use PUT for editing, POST for creating
+    const method = initialValues ? "PUT" : "POST";
 
     try {
       const response = await fetch(url, {
@@ -60,9 +59,8 @@ const UserForm: React.FC<UserFormProps> = ({
         );
       }
 
-      const updatedUser = await response.json(); // Get the updated user from response
+      const updatedUser = await response.json();
 
-      // Trigger the onSubmit callback with updated user
       await onSubmit(updatedUser);
     } catch (error) {
       console.error("Error:", error);

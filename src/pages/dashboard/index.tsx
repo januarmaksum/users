@@ -37,7 +37,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({
   error,
 }) => {
   const [users, setUsers] = useState(initialUsers);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleUserCreated = async () => {
     try {
@@ -47,7 +47,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({
       }
       const updatedUsers = await response.json();
       setUsers(updatedUsers);
-      setIsModalOpen(false); // Close modal after creating user
+      setIsModalOpen(false);
     } catch (error) {
       console.error("Failed to reload users:", error);
     }
