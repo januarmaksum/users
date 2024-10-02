@@ -9,9 +9,6 @@ const UserDetail = ({ user }: UserDetailProps) => {
   return (
     <div className="flex justify-center items-center">
       <div className="text-center">
-        <h1 className="text-2xl font-bold">
-          {user.first_name} {user.last_name}
-        </h1>
         <Image
           src={user.avatar}
           alt={`${user.first_name} ${user.last_name}`}
@@ -20,7 +17,10 @@ const UserDetail = ({ user }: UserDetailProps) => {
           height={96}
         />
         <p>ID: {user.id}</p>
-        <p>Email: {user.email}</p>
+        <h1 className="text-2xl font-bold">
+          {user.first_name} {user.last_name}
+        </h1>
+        <p>{user.email}</p>
       </div>
     </div>
   );

@@ -17,6 +17,15 @@ export default async function handler(
     try {
       const { email, first_name, last_name, avatar } = req.body;
 
+      // Check if the email already exists
+      const existingUser = await prisma.user.findUnique({
+        where: { email },
+      });
+
+      if (existingUser) {
+        return res.status(400).json({ error: "Email already exists" });
+      }
+
       const newUser = await prisma.user.create({
         data: {
           email,
@@ -34,6 +43,17 @@ export default async function handler(
   } else if (req.method === "PUT") {
     try {
       const { id, email, first_name, last_name, avatar } = req.body;
+
+      const existingUser = await prisma.user.findFirst({
+        where: {
+          email,
+          NOT: { id },
+        },
+      });
+
+      if (existingUser) {
+        return res.status(400).json({ error: "Email already exists" });
+      }
 
       const updatedUser = await prisma.user.update({
         where: { id },

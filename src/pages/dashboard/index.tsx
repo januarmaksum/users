@@ -62,13 +62,13 @@ const DashboardPage: React.FC<DashboardPageProps> = ({
         <div className="flex justify-between items-center mb-4 border-b py-2">
           <h1 className="text-2xl font-bold">User List</h1>
           <div className="flex gap-2">
-            <LogoutButton />
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+              className="bg-blue-500 text-white md:py-2 px-3 text-sm md:text-base md:px-4 rounded hover:bg-blue-600"
             >
               Create User
             </button>
+            <LogoutButton />
           </div>
         </div>
 

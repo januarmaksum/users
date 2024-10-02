@@ -7,6 +7,7 @@ import { useState } from "react";
 import Modal from "@/components/Modal";
 import UserForm from "@/components/users/UserForm";
 import { useRouter } from "next/router";
+import useToast from "@/components/Toast";
 
 interface Params {
   id: string;
@@ -39,6 +40,7 @@ const UserDetailPage = ({ user: initialUser }: { user: User }) => {
   const router = useRouter();
   const [user, setUser] = useState<User>(initialUser);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const showToast = useToast();
   const defaultTitle = "User Profile";
 
   const handleNav = () => {
@@ -59,9 +61,9 @@ const UserDetailPage = ({ user: initialUser }: { user: User }) => {
   };
 
   const handleUserCreated = async (updatedUser: User) => {
-    console.log("Updated user:", updatedUser);
     try {
       await refetchUser();
+      setIsModalOpen(false);
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -90,6 +92,7 @@ const UserDetailPage = ({ user: initialUser }: { user: User }) => {
       }
 
       router.push("/");
+      showToast.success('User delete successfully!')
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -107,28 +110,28 @@ const UserDetailPage = ({ user: initialUser }: { user: User }) => {
       <div className="container max-w-4xl mx-auto px-4">
         <div className="flex justify-between items-center mb-4 border-b py-2">
           <div className="flex gap-2 items-center">
-            <h1 className="text-2xl font-bold">Detail Profile</h1>
+            <h1 className="text-base md:text-2xl font-bold">Detail Profile</h1>
             <button
               onClick={handleNav}
-              className="border border-blue-500 text-black hover:bg-blue-700 hover:border-bg-blue-700 hover:text-white rounded py-2 px-4"
+              className="border border-blue-500 hidden md:block text-black hover:bg-blue-700 hover:border-bg-blue-700 hover:text-white rounded md:py-2 px-3 text-sm md:text-base md:px-4"
             >
               Home
             </button>
           </div>
           <div className="flex gap-2">
-            <LogoutButton />
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+              className="bg-blue-500 text-white md:py-2 px-3 text-sm md:text-base md:px-4 rounded hover:bg-blue-600"
             >
               Edit
             </button>
             <button
               onClick={handleUserDelete}
-              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+              className="bg-red-500 text-white md:py-2 px-3 text-sm md:text-base md:px-4 rounded hover:bg-red-600"
             >
               Delete
             </button>
+            <LogoutButton />
           </div>
         </div>
       </div>
