@@ -31,10 +31,10 @@ const LoginForm = () => {
         window.location.href = "/dashboard";
       } else {
         setErrorMessage("Login failed. Please try again.");
+        setIsSubmitting(false);
       }
     } catch {
       setErrorMessage("Something went wrong. Please try again.");
-    } finally {
       setIsSubmitting(false);
     }
   };

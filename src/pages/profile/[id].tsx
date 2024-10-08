@@ -60,7 +60,7 @@ const UserDetailPage = ({ user: initialUser }: { user: User }) => {
     setUser(updatedUser);
   };
 
-  const handleUserCreated = async (updatedUser: User) => {
+  const handleUserCreated = async () => {
     try {
       await refetchUser();
       setIsModalOpen(false);
